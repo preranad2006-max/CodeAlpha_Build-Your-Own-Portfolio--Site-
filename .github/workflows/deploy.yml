@@ -32,14 +32,17 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
+      - name: Clean old npm lock
+        run: rm -f package-lock.json
 
-      - name: Install Vite and React plugin
-        run: npm install --save-dev vite@8.3.0 @vitejs/plugin-react@6.1.1 --no-audit --no-fund
+      - name: Install dependencies
+        run: npm install --registry=https://registry.npmjs.org/ --no-audit --no-fund
+
+      - name: Install React Vite plugin
+        run: npm install -D @vitejs/plugin-react@6.1.1 --registry=https://registry.npmjs.org/ --no-audit --no-fund
 
       - name: Build Vite project
-        run: ./node_modules/.bin/vite build
+        run: npm run build
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5

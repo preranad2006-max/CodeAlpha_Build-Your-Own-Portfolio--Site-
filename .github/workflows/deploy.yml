@@ -30,13 +30,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 20
+          cache: false
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund
 
-      - name: Install Vite and React plugin
-        run: npm install vite@8.3.0 @vitejs/plugin-react@6.1.1
+      - name: Install React Vite plugin
+        run: npm install -D @vitejs/plugin-react --no-audit --no-fund
 
       - name: Build Vite project
         run: npx vite build
